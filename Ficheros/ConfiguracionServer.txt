@@ -1,0 +1,2 @@
+log_db_file_server=../Logs/logServer.txt
+db_file=../BD/puebloPerdido.db
