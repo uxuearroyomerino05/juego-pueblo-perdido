@@ -34,7 +34,7 @@ The Qt modules used by the client are:
 - Qt GUI
 - Qt Widgets
 
-A compatible Qt installation must include these modules and the matching MinGW toolchain.
+A compatible Qt installation must include these modules and the matching MinGW toolchain for compiling C and C++.
 
 ## 4. Networking
 
