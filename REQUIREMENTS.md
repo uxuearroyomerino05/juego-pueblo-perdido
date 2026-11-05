@@ -1,86 +1,115 @@
 # Requirements — Juego Pueblo Perdido
 
-## 1. Operating System
+[English](#english) | [Español](#español)
 
-The project uses Windows-specific networking APIs through Winsock.
+<a id="english"></a>
+# English
 
-- **Platform:** Windows
-- **Architecture:** The client configuration included in the project targets 64-bit MinGW.
+## Operating System
 
-## 2. Programming Languages
+- Windows (required for the Winsock networking implementation).
 
-- C
-- C++
+## Development Environment
 
-The server contains both C and C++ source files.
+| Tool | Version / Configuration |
+|---|---|
+| Qt | 6.9.0 |
+| Qt Creator | Compatible with Qt 6.9.0 |
+| MinGW | 13.1.0, 64-bit |
+| qmake | 3.1 |
+| C++ standard (server) | C++11 |
+| Make | GNU Make compatible with the included Makefile |
 
-## 3. Qt Development Environment
+## Libraries and Modules
 
-The client uses Qt Widgets for its graphical interface.
+| Library / Module | Purpose |
+|---|---|
+| Qt Core | Core application functionality |
+| Qt GUI | GUI integration |
+| Qt Widgets | Graphical user interface |
+| Winsock2 | TCP socket communication |
+| SQLite 3.49.1 | Database management |
 
-The included project configuration indicates the following environment:
+SQLite source files (`sqlite3.c` and `sqlite3.h`) are included in the repository.
 
-- **Qt version:** 6.9.0
-- **Build system:** qmake
-- **Compiler toolchain:** MinGW 64-bit
-- **Compiler toolchain directory:** `C:/Qt/Tools/mingw1310_64/`
-- **GCC/G++ version indicated by the toolchain path:** 13.1.0
+Winsock2 is provided by the Windows development environment and linked through `ws2_32`.
 
-The client project file is located at `Client/puebloPerdido.pro`.
+## Compiler Configuration
 
-The Qt modules used by the client are:
+The client project uses the MinGW toolchain included with Qt 6.9.0.
 
-- Qt Core
-- Qt GUI
-- Qt Widgets
+The `.pro` file specifies the compiler executable paths:
 
-A compatible Qt installation must include these modules and the matching MinGW toolchain for compiling C and C++.
+- `C:/Qt/Tools/mingw1310_64/bin/gcc.exe`
+- `C:/Qt/Tools/mingw1310_64/bin/g++.exe`
 
-## 4. Networking
+The server Makefile uses `gcc` and `g++` from the system PATH.
 
-The client and server communicate through TCP sockets using the Windows Winsock API.
+**Important:** If another MinGW/GCC installation is available, make sure the server uses the same MinGW toolchain included with Qt. This avoids mixing incompatible compiler versions.
 
-- **Networking API:** Winsock2
-- **Default server port:** 6000
+If Qt is installed in a different directory, update the compiler paths in `Client/puebloPerdido.pro`.
 
-Ensure that the selected port is available and that local firewall settings allow the connection.
+## Network Configuration
 
-## 5. Database
+- Protocol: TCP
+- Networking API: Winsock2
+- Default server address: `127.0.0.1`
+- Default server port: `6000`
+- Maximum simultaneous client connections: 1
 
-The server uses SQLite for persistent data storage.
+---
 
-- **Database engine:** SQLite
-- **Source files included:** `Server/sqlite3.c` and `Server/sqlite3.h`
-- **Database files:** Located in `BD/`
+<a id="español"></a>
+# Español
 
-The project includes SQLite source code, so a separate SQLite installation may not be necessary for the database component.
+## Sistema operativo
 
-## 6. Build Requirements
+- Windows (necesario para la implementación de red mediante Winsock).
 
-### Client
+## Entorno de desarrollo
 
-The client requires:
-- Qt 6.9.0, or a compatible installation
-- Qt Widgets
-- qmake
-- A compatible 64-bit MinGW toolchain
-- Windows SDK/system libraries required by the compiler
+| Herramienta | Versión / Configuración |
+|---|---|
+| Qt | 6.9.0 |
+| Qt Creator | Compatible con Qt 6.9.0 |
+| MinGW | 13.1.0, 64 bits |
+| qmake | 3.1 |
+| Estándar de C++ (servidor) | C++11 |
+| Make | GNU Make compatible con el Makefile incluido |
 
-The `.pro` file currently contains absolute compiler paths. These paths may need to be updated to match the local Qt installation.
+## Librerías y módulos
 
-### Server
+| Librería / Módulo | Uso |
+|---|---|
+| Qt Core | Funcionalidad principal de la aplicación |
+| Qt GUI | Integración gráfica |
+| Qt Widgets | Interfaz gráfica |
+| Winsock2 | Comunicación mediante sockets TCP |
+| SQLite 3.49.1 | Gestión de la base de datos |
 
-The server uses C and C++ source files, Winsock, and SQLite.
+Los archivos fuente de SQLite (`sqlite3.c` y `sqlite3.h`) están incluidos en el repositorio.
 
-**The exact compiler version and server build procedure still need to be verified** against the original development environment before this project can be considered reproducible from a clean installation.
+Winsock2 está proporcionado por el entorno de desarrollo de Windows y se enlaza mediante `ws2_32`.
 
-## 7. Configuration Notes
+## Configuración del compilador
 
-- The client and server are separate applications.
-- Start the server before launching the client.
-- Check the configured IP address and port if the client cannot connect.
-- The server is designed to handle one client connection at a time.
+El proyecto del cliente utiliza el toolchain MinGW incluido en Qt 6.9.0.
 
-## 8. Verified Environment
+El archivo `.pro` especifica las rutas de los ejecutables del compilador:
 
-The versions listed above are based on the project configuration and build artifacts included in the repository. They should be checked against the original development environment before being treated as a complete record of the versions used during development.
+- `C:/Qt/Tools/mingw1310_64/bin/gcc.exe`
+- `C:/Qt/Tools/mingw1310_64/bin/g++.exe`
+
+El Makefile del servidor utiliza `gcc` y `g++` disponibles en el PATH del sistema.
+
+**Importante:** Si hay otra instalación de MinGW/GCC disponible, asegúrate de que el servidor utiliza el mismo toolchain MinGW incluido en Qt. Así se evita mezclar versiones incompatibles del compilador.
+
+Si Qt está instalado en otra ubicación, actualiza las rutas de los compiladores en `Client/puebloPerdido.pro`.
+
+## Configuración de red
+
+- Protocolo: TCP.
+- API de red: Winsock2.
+- Dirección del servidor por defecto: `127.0.0.1`.
+- Puerto del servidor por defecto: `6000`.
+- Máximo de clientes simultáneos: 1.
